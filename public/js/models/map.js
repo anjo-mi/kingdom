@@ -55,5 +55,9 @@ export class GameMap{
         return false;
     }
 
+    getAvailableDistance(startX, startY, targetX, targetY, width, height){
+        
+    }
+
 }
 

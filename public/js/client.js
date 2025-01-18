@@ -13,7 +13,7 @@ class Game{
             y: this.map.tileSize + 16,
             width: 32,
             height: 32,
-            speed: 1
+            speed: 5
         };
 
         this.gameLoop();
