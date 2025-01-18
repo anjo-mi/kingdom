@@ -25,21 +25,35 @@ export class GameMap{
     }
 
     checkCollision(x,y,width,height){
-        const points = [
-            {x,y},                          // top-left
-            {x: x + width, y},              // top-right
-            {x, y: y + height},             // bottom-left
-            {x: x + width, y: y + height}   // bottom-right
-        ];
+        const playerLeft = x;
+        const playerRight = x + width;
+        const playerTop = y;
+        const playerBottom = y + height;
 
-        for (const point of points){
-            const tileX = Math.floor(point.x / this.tileSize);
-            const tileY = Math.floor(point.y / this.tileSize);
-            if (this.getTileAt(tileX, tileY) === 1){
-                return true;
+        const leftTile = Math.floor(playerLeft / this.tileSize);
+        const rightTile = Math.floor((playerRight - 1) / this.tileSize);
+        const topTile = Math.floor(playerTop / this.tileSize);
+        const bottomTile = Math.floor((playerBottom - 1) / this.tileSize);
+
+        for (let tileY = topTile; tileY <= bottomTile; tileY++){
+            for (let tileX = leftTile; tileX <= rightTile; tileX++){
+                if (this.getTileAt(tileX, tileY) === 1){
+                    const tileLeft = tileX * this.tileSize;
+                    const tileRight = (tileX + 1) * this.tileSize;
+                    const tileTop = tileY * this.tileSize;
+                    const tileBottom = (tileY + 1) * this.tileSize;
+
+                    if (playerRight > tileLeft && 
+                        playerLeft < tileRight && 
+                        playerBottom > tileTop && 
+                        playerTop < tileBottom){
+                            return true;
+                    }
+                }
             }
         }
         return false;
     }
 
 }
+

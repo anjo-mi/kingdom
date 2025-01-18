@@ -13,7 +13,7 @@ class Game{
             y: this.map.tileSize + 16,
             width: 32,
             height: 32,
-            speed: 5
+            speed: 1
         };
 
         this.gameLoop();
@@ -23,14 +23,22 @@ class Game{
         let newX = this.player.x;
         let newY = this.player.y;
 
-        if (this.input.keys.up) newY -= this.player.speed;
-        if (this.input.keys.down) newY += this.player.speed;
+
         if (this.input.keys.left) newX -= this.player.speed;
         if (this.input.keys.right) newX += this.player.speed;
 
-        if (!this.map.checkCollision(newX, newY, this.player.width, this.player.height)){
+        if (!this.map.checkCollision(newX, this.player.y, this.player.width, this.player.height)){
             this.player.x = newX;
-            this.player.y = newY;
+        }else{
+            newX = this.player.x;
+        }
+
+        if (this.input.keys.up) newY -= this.player.speed;
+        if (this.input.keys.down) newY += this.player.speed;
+        
+
+        if (!this.map.checkCollision(this.player.x, newY, this.player.width, this.player.height)){
+            this.player.y = newY
         }
 
         this.player.x = Math.max(0, Math.min(this.player.x, this.renderer.canvas.width - this.player.width));
