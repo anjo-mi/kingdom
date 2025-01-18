@@ -26,20 +26,14 @@ class Game{
 
         if (this.input.keys.left) newX -= this.player.speed;
         if (this.input.keys.right) newX += this.player.speed;
-
-        if (!this.map.checkCollision(newX, this.player.y, this.player.width, this.player.height)){
-            this.player.x = newX;
-        }else{
-            newX = this.player.x;
-        }
-
         if (this.input.keys.up) newY -= this.player.speed;
         if (this.input.keys.down) newY += this.player.speed;
         
 
-        if (!this.map.checkCollision(this.player.x, newY, this.player.width, this.player.height)){
-            this.player.y = newY
-        }
+        const availableDistance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
+
+        this.player.x += availableDistance.x;
+        this.player.y += availableDistance.y;
 
         this.player.x = Math.max(0, Math.min(this.player.x, this.renderer.canvas.width - this.player.width));
         this.player.y = Math.max(0, Math.min(this.player.y, this.renderer.canvas.height - this.player.height));

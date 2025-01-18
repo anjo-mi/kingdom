@@ -25,30 +25,31 @@ export class GameMap{
     }
 
     checkCollision(x,y,width,height){
-        const playerLeft = x;
-        const playerRight = x + width;
-        const playerTop = y;
-        const playerBottom = y + height;
+        // const playerLeft = x;
+        // const playerRight = x + width;
+        // const playerTop = y;
+        // const playerBottom = y + height;
 
-        const leftTile = Math.floor(playerLeft / this.tileSize);
-        const rightTile = Math.floor((playerRight - 1) / this.tileSize);
-        const topTile = Math.floor(playerTop / this.tileSize);
-        const bottomTile = Math.floor((playerBottom - 1) / this.tileSize);
+        const leftTile = Math.floor(x / this.tileSize);
+        const rightTile = Math.floor((x - 1 + width) / this.tileSize);
+        const topTile = Math.floor(y / this.tileSize);
+        const bottomTile = Math.floor((y - 1 + height) / this.tileSize);
 
         for (let tileY = topTile; tileY <= bottomTile; tileY++){
             for (let tileX = leftTile; tileX <= rightTile; tileX++){
                 if (this.getTileAt(tileX, tileY) === 1){
-                    const tileLeft = tileX * this.tileSize;
-                    const tileRight = (tileX + 1) * this.tileSize;
-                    const tileTop = tileY * this.tileSize;
-                    const tileBottom = (tileY + 1) * this.tileSize;
+                    return true;
+                    // const tileLeft = tileX * this.tileSize;
+                    // const tileRight = (tileX + 1) * this.tileSize;
+                    // const tileTop = tileY * this.tileSize;
+                    // const tileBottom = (tileY + 1) * this.tileSize;
 
-                    if (playerRight > tileLeft && 
-                        playerLeft < tileRight && 
-                        playerBottom > tileTop && 
-                        playerTop < tileBottom){
-                            return true;
-                    }
+                    // if (playerRight > tileLeft && 
+                    //     playerLeft < tileRight && 
+                    //     playerBottom > tileTop && 
+                    //     playerTop < tileBottom){
+                    //         return true;
+                    // }
                 }
             }
         }
@@ -56,7 +57,36 @@ export class GameMap{
     }
 
     getAvailableDistance(startX, startY, targetX, targetY, width, height){
-        
+        if (!this.checkCollision(targetX, targetY, width, height)){
+            return {
+                x: targetX - startX,
+                y: targetY - startY
+            }
+        }
+
+        let availableX = 0;
+        let availableY = 0;
+
+        const dx = Math.sign(targetX - startX);
+        if (dx !== 0){
+            let testX = startX;
+            while (testX !== targetX && !this.checkCollision(testX, startY, width, height)){
+                testX += dx;
+                availableX = testX - startX;
+            }
+            availableX -= dx;
+        }
+
+        const dy = Math.sign(targetY - startY);
+        if (dy !== 0){
+            let testY = startY;
+            while (testY !== targetY && !this.checkCollision(startX, testY, width, height)){
+                testY += dy;
+                availableY = testY - startY;
+            }
+            availableY -= dy;
+        }
+        return {x: availableX, y: availableY};
     }
 
 }
