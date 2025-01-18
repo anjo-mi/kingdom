@@ -16,7 +16,8 @@ export class GameMap{
         this.width = this.tiles[0].length;
         this.height = this.tiles.length;
     }
-
+    // called from Renderer.drawMap() and this.checkCollision()
+    // takes x and y coordinates and return the tile value at that position
     getTileAt(x,y){
         if (x < 0 || x >= this.width || y < 0 || y >= this.height){
             return 1;
@@ -24,6 +25,10 @@ export class GameMap{
         return this.tiles[y][x];
     }
 
+
+    // called from this.getAvailableDistance()
+    // checks the tiles between start and target position to see if a collision (1) occurs at any point
+    // RETURNS: true if collision, false if not
     checkCollision(x,y,width,height){
 
         const leftTile = Math.floor(x / this.tileSize);
@@ -41,6 +46,8 @@ export class GameMap{
         return false;
     }
 
+    // called from Game.update(), if there is no collision, return the distance between start and target, otherwise find the first tile in the way and return the distance to that tile (both for x and y motion)
+    // RETURN: { x , y }
     getAvailableDistance(startX, startY, targetX, targetY, width, height){
         if (!this.checkCollision(targetX, targetY, width, height)){
             return {

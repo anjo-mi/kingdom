@@ -19,6 +19,8 @@ class Game{
         this.gameLoop();
     }
 
+    // checks for input, calls Map.getAvailableDistance() which will check for collisions between start and target, moves player to position { x , y } returned from getAvailableDistance()
+    // sets player.x and player.y to new postiion, while maintaining position inside the canvas
     update(){
         let newX = this.player.x;
         let newY = this.player.y;
@@ -39,12 +41,14 @@ class Game{
         this.player.y = Math.max(0, Math.min(this.player.y, this.renderer.canvas.height - this.player.height));
     }
 
+    // clear the canvas, draw the map and draw the player
     draw(){
         this.renderer.clear();
         this.renderer.drawMap(this.map);
         this.renderer.drawPlayer(this.player.x, this.player.y);
     }
 
+    // continually calls update() and draw() with new animation frames to continuously 'paint' the canvas
     gameLoop(){
         this.update();
         this.draw();
