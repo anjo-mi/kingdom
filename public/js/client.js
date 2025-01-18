@@ -25,7 +25,6 @@ class Game{
         let newX = this.player.x;
         let newY = this.player.y;
 
-
         if (this.input.keys.left) newX -= this.player.speed;
         if (this.input.keys.right) newX += this.player.speed;
         if (this.input.keys.up) newY -= this.player.speed;
@@ -37,8 +36,10 @@ class Game{
         this.player.x += availableDistance.x;
         this.player.y += availableDistance.y;
 
-        this.player.x = Math.max(0, Math.min(this.player.x, this.renderer.canvas.width - this.player.width));
-        this.player.y = Math.max(0, Math.min(this.player.y, this.renderer.canvas.height - this.player.height));
+        this.player.x = Math.max(0, Math.min(this.player.x, this.map.width - this.player.width));
+        this.player.y = Math.max(0, Math.min(this.player.y, this.map.height - this.player.height));
+
+        this.renderer.updateCamera(this.player, this.map.width, this.map.height);
     }
 
     // clear the canvas, draw the map and draw the player
