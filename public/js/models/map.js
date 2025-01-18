@@ -25,10 +25,6 @@ export class GameMap{
     }
 
     checkCollision(x,y,width,height){
-        // const playerLeft = x;
-        // const playerRight = x + width;
-        // const playerTop = y;
-        // const playerBottom = y + height;
 
         const leftTile = Math.floor(x / this.tileSize);
         const rightTile = Math.floor((x - 1 + width) / this.tileSize);
@@ -39,17 +35,6 @@ export class GameMap{
             for (let tileX = leftTile; tileX <= rightTile; tileX++){
                 if (this.getTileAt(tileX, tileY) === 1){
                     return true;
-                    // const tileLeft = tileX * this.tileSize;
-                    // const tileRight = (tileX + 1) * this.tileSize;
-                    // const tileTop = tileY * this.tileSize;
-                    // const tileBottom = (tileY + 1) * this.tileSize;
-
-                    // if (playerRight > tileLeft && 
-                    //     playerLeft < tileRight && 
-                    //     playerBottom > tileTop && 
-                    //     playerTop < tileBottom){
-                    //         return true;
-                    // }
                 }
             }
         }
