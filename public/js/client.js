@@ -25,25 +25,43 @@ class Game{
         let newX = this.player.x;
         let newY = this.player.y;
 
-        if ((this.input.keys.up || this.input.keys.down) &&
-            (this.input.keys.left || this.input.keys.right)){
-                const diagonalSpeed = this.player.speed / Math.sqrt(2);
-                
-                if (this.input.keys.left) newX -= diagonalSpeed;
-                if (this.input.keys.right) newX += diagonalSpeed;
-                if (this.input.keys.up) newY -= diagonalSpeed;
-                if (this.input.keys.down) newY += diagonalSpeed;
-            }else{
-                if (this.input.keys.left) newX -= this.player.speed;
-                if (this.input.keys.right) newX += this.player.speed;
+        const isDiagonal = (this.input.keys.up || this.input.keys.down) && (this.input.keys.left || this.input.keys.right);
+        const speed = isDiagonal ? this.player.speed / Math.sqrt(2) : this.player.speed;
+
+        if (isDiagonal){
+            if (this.input.keys.up) newY -= speed;
+            if (this.input.keys.down) newY += speed;
+            if (this.input.keys.right) newX += speed;
+            if (this.input.keys.left) newX -= speed;
+
+            const diagonalDistance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
+
+            if (diagonalDistance.x === 0 || diagonalDistance.y === 0){
+                newX = this.player.x;
+                newY = this.player.y;
+
                 if (this.input.keys.up) newY -= this.player.speed;
                 if (this.input.keys.down) newY += this.player.speed;
+                if (this.input.keys.right) newX += this.player.speed;
+                if (this.input.keys.left) newX -= this.player.speed;
+
+                const distance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
+                this.player.x += distance.x;
+                this.player.y += distance.y;
+            }else{
+                this.player.x += diagonalDistance.x;
+                this.player.y += diagonalDistance.y;
             }
+        }else{
+            if (this.input.keys.left) newX -= this.player.speed;
+            if (this.input.keys.right) newX += this.player.speed;
+            if (this.input.keys.up) newY -= this.player.speed;
+            if (this.input.keys.down) newY += this.player.speed;
 
-        const availableDistance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
-
-        this.player.x += availableDistance.x;
-        this.player.y += availableDistance.y;
+            const distance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
+            this.player.x += distance.x;
+            this.player.y += distance.y;
+        }
 
         this.player.x = Math.max(0, Math.min(this.player.x, this.map.width - this.player.width));
         this.player.y = Math.max(0, Math.min(this.player.y, this.map.height - this.player.height));
