@@ -52,34 +52,37 @@ export class GameMap{
 
     // called from Game.update(), if there is no collision, return the distance between start and target, otherwise find the first tile in the way and return the distance to that tile (both for x and y motion)
     // RETURN: { x , y }
-    getAvailableDistance(startX, startY, targetX, targetY, width, height){
-        if (!this.checkCollision(targetX, targetY, width, height)){
+    getAvailableDistance(startX, startY, targetX, targetY, width, height) {
+        // First check if we can move to target directly
+        if (!this.checkCollision(targetX, targetY, width, height)) {
             return {
                 x: targetX - startX,
                 y: targetY - startY
             }
         }
-
+    
         let availableX = 0;
         let availableY = 0;
-
-        const dx = Math.sign(targetX - startX);
-        const dy = Math.sign(targetY - startY);
         
-        let testX = startX;
-        let testY = startY;
-        const step = 1;
-
-        while (testX !== targetX && !this.checkCollision(testX + (dx * step), testY, width, height)){
-            testX += dx * step;
-            availableX = testX - startX;
+        // If we can't move to target, check X and Y separately
+        const dx = Math.sign(targetX - startX);
+        if (dx !== 0) {
+            let testX = startX;
+            while (testX !== targetX && !this.checkCollision(testX + dx, startY, width, height)) {
+                testX += dx;
+                availableX = testX - startX;
+            }
         }
-
-        while (testY !== targetY && !this.checkCollision(testX, tesY + (dy * step), width, height)){
-            testY += dy * step;
-            availableY = testY - startY;
+    
+        const dy = Math.sign(targetY - startY);
+        if (dy !== 0) {
+            let testY = startY;
+            while (testY !== targetY && !this.checkCollision(startX, testY + dy, width, height)) {
+                testY += dy;
+                availableY = testY - startY;
+            }
         }
-
+    
         return {x: availableX, y: availableY};
     }
 
