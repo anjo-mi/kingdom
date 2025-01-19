@@ -25,11 +25,20 @@ class Game{
         let newX = this.player.x;
         let newY = this.player.y;
 
-        if (this.input.keys.left) newX -= this.player.speed;
-        if (this.input.keys.right) newX += this.player.speed;
-        if (this.input.keys.up) newY -= this.player.speed;
-        if (this.input.keys.down) newY += this.player.speed;
-        
+        if ((this.input.keys.up || this.input.keys.down) &&
+            (this.input.keys.left || this.input.keys.right)){
+                const diagonalSpeed = this.player.speed / Math.sqrt(2);
+                
+                if (this.input.keys.left) newX -= diagonalSpeed;
+                if (this.input.keys.right) newX += diagonalSpeed;
+                if (this.input.keys.up) newY -= diagonalSpeed;
+                if (this.input.keys.down) newY += diagonalSpeed;
+            }else{
+                if (this.input.keys.left) newX -= this.player.speed;
+                if (this.input.keys.right) newX += this.player.speed;
+                if (this.input.keys.up) newY -= this.player.speed;
+                if (this.input.keys.down) newY += this.player.speed;
+            }
 
         const availableDistance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
 

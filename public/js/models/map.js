@@ -64,24 +64,23 @@ export class GameMap{
         let availableY = 0;
 
         const dx = Math.sign(targetX - startX);
-        if (dx !== 0){
-            let testX = startX;
-            while (testX !== targetX && !this.checkCollision(testX, startY, width, height)){
-                testX += dx;
+        const dy = Math.sign(targetY - startY);
+        
+        let testX = startX;
+        let testY = startY;
+        const step = 1;
+
+        while ((testX !== targetX || testY !== targetY) && !this.checkCollision(testX + (dx * step), testY + (dy * step), width, height)){
+            if (testX !== targetX){
+                testX += dx * step;
                 availableX = testX - startX;
             }
-            availableX -= dx;
-        }
-
-        const dy = Math.sign(targetY - startY);
-        if (dy !== 0){
-            let testY = startY;
-            while (testY !== targetY && !this.checkCollision(startX, testY, width, height)){
-                testY += dy;
+            if (testY !== targetY){
+                testY += dy * step;
                 availableY = testY - startY;
             }
-            availableY -= dy;
         }
+
         return {x: availableX, y: availableY};
     }
 
