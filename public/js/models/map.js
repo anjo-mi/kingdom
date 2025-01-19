@@ -70,15 +70,14 @@ export class GameMap{
         let testY = startY;
         const step = 1;
 
-        while ((testX !== targetX || testY !== targetY) && !this.checkCollision(testX + (dx * step), testY + (dy * step), width, height)){
-            if (testX !== targetX){
-                testX += dx * step;
-                availableX = testX - startX;
-            }
-            if (testY !== targetY){
-                testY += dy * step;
-                availableY = testY - startY;
-            }
+        while (testX !== targetX && !this.checkCollision(testX + (dx * step), testY, width, height)){
+            testX += dx * step;
+            availableX = testX - startX;
+        }
+
+        while (testY !== targetY && !this.checkCollision(testX, tesY + (dy * step), width, height)){
+            testY += dy * step;
+            availableY = testY - startY;
         }
 
         return {x: availableX, y: availableY};
