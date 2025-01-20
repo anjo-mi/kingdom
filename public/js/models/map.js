@@ -64,23 +64,23 @@ export class GameMap{
         let availableY = 0;
 
         if (this.checkCollision(targetX, startY, width, height)){
-            const dx = Math.sign(targetX - startX);
-            if (dx !== 0){
-                let testX = startX;
-                while (testX !== targetX && !this.checkCollision(testX + dx, startY, width, height)){
-                    testX += dx;
-                    availableX = testX - startX;
-                }
-            }
-        }
-
-        if (this.checkCollision(startX, targetY, width, height)){
             const dy = Math.sign(targetY - startY);
             if (dy !== 0){
                 let testY = startY;
                 while (testY !== targetY && !this.checkCollision(startX, testY + dy, width, height)){
                     testY += dy;
                     availableY = testY - startY;
+                }
+            }
+        }
+        
+        if (this.checkCollision(startX, targetY, width, height)){
+            const dx = Math.sign(targetX - startX);
+            if (dx !== 0){
+                let testX = startX;
+                while (testX !== targetX && !this.checkCollision(testX + dx, startY, width, height)){
+                    testX += dx;
+                    availableX = testX - startX;
                 }
             }
         }
