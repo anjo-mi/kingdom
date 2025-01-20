@@ -53,61 +53,40 @@ export class GameMap{
     // called from Game.update(), if there is no collision, return the distance between start and target, otherwise find the first tile in the way and return the distance to that tile (both for x and y motion)
     // RETURN: { x , y }
     getAvailableDistance(startX, startY, targetX, targetY, width, height) {
-    // First check if we can move to target directly
-    if (!this.checkCollision(targetX, targetY, width, height)) {
-        return {
-            x: targetX - startX,
-            y: targetY - startY
-        }
-    }
-
-    let availableX = 0;
-    let availableY = 0;
-
-    if (this.checkCollision(targetX, startY, width, height)){
-        const dx = Math.sign(targetX - startX);
-        if (dx !== 0){
-            let testX = startX;
-            while (testX !== targetX && !this.checkCollision(testX + dx, startY, width, height)){
-                testX += dx;
-                availableX = testX - startX;
+        if (!this.checkCollision(targetX, targetY, width, height)) {
+            return {
+                x: targetX - startX,
+                y: targetY - startY
             }
         }
-    }
-    
-    if (this.checkCollision(startX, targetY, width, height)){
-        const dy = Math.sign(targetY - startY);
-        if (dy !== 0){
-            let testY = startY;
-            while (testY !== targetY && !this.checkCollision(startX, testY + dy, width, height)){
-                testY += dy;
-                availableY = testY - startY;
+
+        let availableX = 0;
+        let availableY = 0;
+
+        if (this.checkCollision(targetX, startY, width, height)){
+            const dx = Math.sign(targetX - startX);
+            if (dx !== 0){
+                let testX = startX;
+                while (testX !== targetX && !this.checkCollision(testX + dx, startY, width, height)){
+                    testX += dx;
+                    availableX = testX - startX;
+                }
             }
         }
-    }
-    // Check X movement first
-    // const dx = Math.sign(targetX - startX);
-    // if (dx !== 0) {
-    //     let testX = startX;
-    //     while (testX !== targetX && !this.checkCollision(testX + dx, startY, width, height)) {
-    //         testX += dx;
-    //         availableX = testX - startX;
-    //     }
-    // }
 
-    // // Use updated X position when checking Y movement
-    // const dy = Math.sign(targetY - startY);
-    // if (dy !== 0) {
-    //     let testY = startY;
-    //     const checkX = startX + availableX;  // Use the position after X movement
-    //     while (testY !== targetY && !this.checkCollision(checkX, testY + dy, width, height)) {
-    //         testY += dy;
-    //         availableY = testY - startY;
-    //     }
-    // }
+        if (this.checkCollision(startX, targetY, width, height)){
+            const dy = Math.sign(targetY - startY);
+            if (dy !== 0){
+                let testY = startY;
+                while (testY !== targetY && !this.checkCollision(startX, testY + dy, width, height)){
+                    testY += dy;
+                    availableY = testY - startY;
+                }
+            }
+        }
 
-    return {x: availableX, y: availableY};
-}
+        return {x: availableX, y: availableY};
+    }   
 
 }
 

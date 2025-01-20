@@ -27,33 +27,65 @@ class Game{
         const isDiagonal = (this.input.keys.up || this.input.keys.down) && (this.input.keys.left || this.input.keys.right);
         const speed = isDiagonal ? this.player.speed / Math.sqrt(2) : this.player.speed;
         
-        if (isDiagonal){
+        // if (isDiagonal){
+        //     if (this.input.keys.up) newY -= speed;
+        //     if (this.input.keys.down) newY += speed;
+        //     if (this.input.keys.right) newX += speed;
+        //     if (this.input.keys.left) newX -= speed;
+            
+        //     const diagonalDistance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
+
+        if (isDiagonal) {
             if (this.input.keys.up) newY -= speed;
             if (this.input.keys.down) newY += speed;
             if (this.input.keys.right) newX += speed;
             if (this.input.keys.left) newX -= speed;
-            
-            console.log({newX, newY})
+        
             const diagonalDistance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
-
-            if (diagonalDistance.x === 0) {
-                // Only X is blocked, reset just X and recalculate
+            console.log({diagonalDistance});
+            if (diagonalDistance.x === 0 || diagonalDistance.y === 0) {
+                // If either direction is blocked, recalculate both at full speed
                 newX = this.player.x;
-                if (this.input.keys.left) newX -= this.player.speed;
-                if (this.input.keys.right) newX += this.player.speed;
-                // Keep Y at diagonal speed since it's not blocked
-                this.player.y += diagonalDistance.y;
-            } else if (diagonalDistance.y === 0) {
-                // Only Y is blocked, reset just Y and recalculate
                 newY = this.player.y;
+                
                 if (this.input.keys.up) newY -= this.player.speed;
                 if (this.input.keys.down) newY += this.player.speed;
-                // Keep X at diagonal speed since it's not blocked
-                this.player.x += diagonalDistance.x;
-            }else{
+                if (this.input.keys.right) newX += this.player.speed;
+                if (this.input.keys.left) newX -= this.player.speed;
+        
+                if (diagonalDistance.x !== 0){
+                    const distance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, this.player.y, this.player.width, this.player.height);
+                    this.player.x += distance.x;
+                }
+                if (diagonalDistance.y !== 0){
+                    const distance = this.map.getAvailableDistance(this.player.x, this.player.y, this.player.x, newY, this.player.width, this.player.height);
+                    this.player.y += distance.y;
+                }
+            } else {
+                // No collision, apply diagonal movement
                 this.player.x += diagonalDistance.x;
                 this.player.y += diagonalDistance.y;
             }
+
+
+        //     if (diagonalDistance.x === 0) {
+        //         // Only X is blocked, reset just X and recalculate
+        //         newX = this.player.x;
+        //         if (this.input.keys.left) newX -= this.player.speed;
+        //         if (this.input.keys.right) newX += this.player.speed;
+        //         // Keep Y at diagonal speed since it's not blocked
+        //         this.player.y += diagonalDistance.y;
+        //     } else if (diagonalDistance.y === 0) {
+        //         // Only Y is blocked, reset just Y and recalculate
+        //         newY = this.player.y;
+        //         if (this.input.keys.up) newY -= this.player.speed;
+        //         if (this.input.keys.down) newY += this.player.speed;
+        //         // Keep X at diagonal speed since it's not blocked
+        //         this.player.x += diagonalDistance.x;
+        //     }else{
+        //         this.player.x += diagonalDistance.x;
+        //         this.player.y += diagonalDistance.y;
+        //     }
         }else{
             if (this.input.keys.left) newX -= this.player.speed;
             if (this.input.keys.right) newX += this.player.speed;
