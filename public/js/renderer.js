@@ -52,12 +52,20 @@ export class Renderer{
         }
     }
 
-    drawPlayer(x,y){
-        this.ctx.fillStyle = 'red';
-        this.ctx.fillRect(
-            x - this.camera.x,
-            y - this.camera.y,
-            32,
-            32)
+    drawPlayer(player){
+        const currentFrame = player.sprite.getCurrentFrame();
+        if (!currentFrame) return;
+
+        this.ctx.drawImage(
+            player.sprite.image,
+            currentFrame.x,
+            currentFrame.y,
+            currentFrame.width,
+            currentFrame.height,
+            player.x - this.camera.x,
+            player.y - this.camera.y,
+            currentFrame.width,
+            currentFrame.height
+        );
     }
 }

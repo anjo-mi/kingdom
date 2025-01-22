@@ -92,7 +92,7 @@ class Game{
     draw(){
         this.renderer.clear();
         this.renderer.drawMap(this.map);
-        this.renderer.drawPlayer(this.player.x, this.player.y);
+        this.renderer.drawPlayer(this.player);
     }
 
     // continually calls update() and draw() with new animation frames to continuously 'paint' the canvas
@@ -106,46 +106,46 @@ class Game{
 }
 const walkRight1 = new Frame(
     '/public/images/char.png',
-    '-19px',
-    '-145px',
-    '24px',
-    '47px'
+    -19,
+    -145,
+    24,
+    47
 )
 
 const walkRight2 = new Frame(
     '/public/images/char.png',
-    '-53px',
-    '-144px',
-    '27px',
-    '48px'
+    -53,
+    -144,
+    27,
+    48
 )
 const walkRight3 = new Frame(
     '/public/images/char.png',
-    '-90px',
-    '-146px',
-    '39px',
-    '46px'
+    -90,
+    -146,
+    39,
+    46
 )
 const walkRight4 = new Frame(
     '/public/images/char.png',
-    '-137px',
-    '-144px',
-    '26px',
-    '48px'
+    -137,
+    -144,
+    26,
+    48
 )
 const walkRight5 = new Frame(
     '/public/images/char.png',
-    '-171px',
-    '-145px',
-    '32px',
-    '47px'
+    -171,
+    -145,
+    32,
+    47
 )
 const walkRight6 = new Frame(
     '/public/images/char.png',
-    '-210px',
-    '-146px',
-    '40px',
-    '46px'
+    -210,
+    -146,
+    40,
+    46
 )
 const walkRight = [walkRight1, walkRight2, walkRight3, walkRight4, walkRight5, walkRight6];
 
