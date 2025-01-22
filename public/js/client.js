@@ -106,44 +106,44 @@ class Game{
 }
 const walkRight1 = new Frame(
     '/public/images/char.png',
-    -19,
-    -145,
+    19,
+    145,
     24,
     47
 )
 
 const walkRight2 = new Frame(
     '/public/images/char.png',
-    -53,
-    -144,
+    53,
+    144,
     27,
     48
 )
 const walkRight3 = new Frame(
     '/public/images/char.png',
-    -90,
-    -146,
+    90,
+    146,
     39,
     46
 )
 const walkRight4 = new Frame(
     '/public/images/char.png',
-    -137,
-    -144,
+    137,
+    144,
     26,
     48
 )
 const walkRight5 = new Frame(
     '/public/images/char.png',
-    -171,
-    -145,
+    171,
+    145,
     32,
     47
 )
 const walkRight6 = new Frame(
     '/public/images/char.png',
-    -210,
-    -146,
+    210,
+    146,
     40,
     46
 )
