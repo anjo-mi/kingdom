@@ -72,6 +72,7 @@ export class Sprite{
 
     getCurrentFrame(){
         if (!this.currentAnimation) return null;
+        console.log(this.currentAnimation.frames[this.currentAnimation.currentFrame]);
         return this.currentAnimation.frames[this.currentAnimation.currentFrame];
     }
 }
