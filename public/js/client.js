@@ -1,6 +1,9 @@
 import { InputHandler } from './input.js';
 import { Renderer } from './renderer.js';
 import { GameMap } from './models/map.js';
+import { Frame } from './sprite.js';
+import { Animation } from './sprite.js';
+import { Sprite } from './sprite.js';
 
 class Game{
     constructor(){
@@ -13,8 +16,11 @@ class Game{
             y: this.map.tileSize + 16,
             width: 32,
             height: 32,
-            speed: 5
+            speed: 5,
+            sprite: new Sprite('/public/images/char.png')
         };
+
+        this.player.sprite.addAnimation(walkRightAnimation);
 
         this.gameLoop();
     }
@@ -60,7 +66,12 @@ class Game{
             }
         }else{
             if (this.input.keys.left) newX -= this.player.speed;
-            if (this.input.keys.right) newX += this.player.speed;
+            if (this.input.keys.right) {
+                newX += this.player.speed;
+                this.player.sprite.startAnimation(0);
+            }else{
+                this.player.sprite.stopAnimation();
+            }
             if (this.input.keys.up) newY -= this.player.speed;
             if (this.input.keys.down) newY += this.player.speed;
 
@@ -71,6 +82,8 @@ class Game{
 
         this.player.x = Math.max(0, Math.min(this.player.x, this.map.width - this.player.width));
         this.player.y = Math.max(0, Math.min(this.player.y, this.map.height - this.player.height));
+
+        this.player.sprite.update();
 
         this.renderer.updateCamera(this.player, this.map.width, this.map.height);
     }
@@ -91,6 +104,52 @@ class Game{
     }
 
 }
+const walkRight1 = new Frame(
+    '/public/images/char.png',
+    '-19px',
+    '-145px',
+    '24px',
+    '47px'
+)
+
+const walkRight2 = new Frame(
+    '/public/images/char.png',
+    '-53px',
+    '-144px',
+    '27px',
+    '48px'
+)
+const walkRight3 = new Frame(
+    '/public/images/char.png',
+    '-90px',
+    '-146px',
+    '39px',
+    '46px'
+)
+const walkRight4 = new Frame(
+    '/public/images/char.png',
+    '-137px',
+    '-144px',
+    '26px',
+    '48px'
+)
+const walkRight5 = new Frame(
+    '/public/images/char.png',
+    '-171px',
+    '-145px',
+    '32px',
+    '47px'
+)
+const walkRight6 = new Frame(
+    '/public/images/char.png',
+    '-210px',
+    '-146px',
+    '40px',
+    '46px'
+)
+const walkRight = [walkRight1, walkRight2, walkRight3, walkRight4, walkRight5, walkRight6];
+
+const walkRightAnimation = new Animation(walkRight)
 
 window.onload = () => {
     const game = new Game();
