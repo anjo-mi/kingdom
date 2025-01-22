@@ -40,7 +40,6 @@ class Game{
             if (this.input.keys.left) newX -= speed;
         
             const diagonalDistance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
-            console.log({diagonalDistance});
             if (diagonalDistance.x === 0 || diagonalDistance.y === 0) {
                 // If either direction is blocked, recalculate both at full speed
                 newX = this.player.x;
@@ -66,14 +65,14 @@ class Game{
             }
         }else{
             if (this.input.keys.left) newX -= this.player.speed;
+            if (this.input.keys.up) newY -= this.player.speed;
+            if (this.input.keys.down) newY += this.player.speed;
             if (this.input.keys.right) {
-                newX += this.player.speed;
                 this.player.sprite.startAnimation(0);
+                newX += this.player.speed;
             }else{
                 this.player.sprite.stopAnimation();
             }
-            if (this.input.keys.up) newY -= this.player.speed;
-            if (this.input.keys.down) newY += this.player.speed;
 
             const distance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
             this.player.x += distance.x;
