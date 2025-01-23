@@ -16,7 +16,7 @@ class Game{
             y: this.map.tileSize + 16,
             width: 32,
             height: 32,
-            speed: 5,
+            speed: 3,
             sprite: new Sprite('/public/images/char.png')
         };
 

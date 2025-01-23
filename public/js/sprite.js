@@ -12,7 +12,7 @@ export class Frame{
 export class Animation{
     constructor(frameArray){
         this.frames = frameArray;
-        this.frameRate = 7;
+        this.frameRate = 8;
         this.loop = true;
         this.isRunning = false;
         this.currentFrame = 0;
