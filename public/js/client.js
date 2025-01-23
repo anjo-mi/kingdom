@@ -74,7 +74,6 @@ class Game{
             }else{
                 this.player.sprite.stopAnimation();
             }
-
             const distance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
             this.player.x += distance.x;
             this.player.y += distance.y;
