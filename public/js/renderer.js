@@ -56,18 +56,6 @@ export class Renderer{
         const currentFrame = player.sprite.getCurrentFrame();
         if (!currentFrame) return;
 
-        // console.log('Drawing with:', {
-        //     image: player.sprite.image,
-        //     sourceX: currentFrame.x,
-        //     sourceY: currentFrame.y,
-        //     sourceWidth: currentFrame.width,
-        //     sourceHeight: currentFrame.height,
-        //     destX: player.x - this.camera.x,
-        //     destY: player.y - this.camera.y,
-        //     destWidth: currentFrame.width,
-        //     destHeight: currentFrame.height
-        // });
-
         this.ctx.drawImage(
             player.sprite.image,
             currentFrame.x,

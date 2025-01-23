@@ -37,7 +37,6 @@ export class Sprite{
 
     startAnimation(index){
         if (index >= 0 && index < this.animations.length){
-            console.log('animation starting')
             this.currentAnimation = this.animations[index];
             this.currentAnimation.isRunning = true;
             this.currentAnimation.currentFrame = 0;
@@ -55,17 +54,10 @@ export class Sprite{
 
     update(){
         if (!this.currentAnimation || !this.currentAnimation.isRunning || this.currentAnimation.isPaused){
-            // console.log('updates early return', {
-            //     hasAnimation: !!this.currentAnimation,
-            //     isRunning: this.currentAnimation?.isRunning,
-            //     isPaused: this.currentAnimation?.isPaused
-            // })
+
             return;
         }
-        console.log(this.currentAnimation.frameCount)
         this.currentAnimation.frameCount = (this.currentAnimation.frameCount || 0) + 1
-        console.log(this.currentAnimation.frameCount)
-        console.log(this.currentAnimation.frameRate)
 
         // this needs to update for just lateral movement
 

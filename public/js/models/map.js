@@ -53,7 +53,6 @@ export class GameMap{
     // called from Game.update(), if there is no collision, return the distance between start and target, otherwise find the first tile in the way and return the distance to that tile (both for x and y motion)
     // RETURN: { x , y }
     getAvailableDistance(startX, startY, targetX, targetY, width, height) {
-        console.log({startX, startY, targetX, targetY, width, height})
         if (!this.checkCollision(targetX, targetY, width, height)) {
             return {
                 x: targetX - startX,
