@@ -34,6 +34,7 @@ class Game{
         const speed = isDiagonal ? this.player.speed / Math.sqrt(2) : this.player.speed;
 
         if (isDiagonal) {
+            console.log('diagonal movement')
             if (this.input.keys.up) newY -= speed;
             if (this.input.keys.down) newY += speed;
             if (this.input.keys.right) newX += speed;
@@ -68,8 +69,8 @@ class Game{
             if (this.input.keys.up) newY -= this.player.speed;
             if (this.input.keys.down) newY += this.player.speed;
             if (this.input.keys.right) {
-                this.player.sprite.startAnimation(0);
                 newX += this.player.speed;
+                this.player.sprite.startAnimation(0);
             }else{
                 this.player.sprite.stopAnimation();
             }

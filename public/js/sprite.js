@@ -37,13 +37,14 @@ export class Sprite{
 
     startAnimation(index){
         if (index >= 0 && index < this.animations.length){
+            console.log('animation starting')
             this.currentAnimation = this.animations[index];
             this.currentAnimation.isRunning = true;
             this.currentAnimation.currentFrame = 0;
             this.currentAnimation.frameCount = 0;
         }
     }
-
+    
     stopAnimation(){
         if (this.currentAnimation){
             this.currentAnimation.isRunning = false;
@@ -53,9 +54,17 @@ export class Sprite{
     }
 
     update(){
-        if (!this.currentAnimation || !this.currentAnimation.isRunning || this.currentAnimation.isPaused) return;
+        if (!this.currentAnimation || !this.currentAnimation.isRunning || this.currentAnimation.isPaused){
+            // console.log('updates early return', {
+            //     hasAnimation: !!this.currentAnimation,
+            //     isRunning: this.currentAnimation?.isRunning,
+            //     isPaused: this.currentAnimation?.isPaused
+            // })
+            return;
+        }
 
         this.currentAnimation.frameCount = (this.currentAnimation.frameCount || 0) + 1
+
 
         if (this.currentAnimation.frameCount >= this.currentAnimation.frameRate){
             this.currentAnimation.frameCount = 0;
@@ -72,7 +81,6 @@ export class Sprite{
 
     getCurrentFrame(){
         if (!this.currentAnimation) return null;
-        console.log(this.currentAnimation.frames[this.currentAnimation.currentFrame]);
         return this.currentAnimation.frames[this.currentAnimation.currentFrame];
     }
 }
