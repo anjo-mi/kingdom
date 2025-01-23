@@ -70,7 +70,9 @@ class Game{
             if (this.input.keys.down) newY += this.player.speed;
             if (this.input.keys.right) {
                 newX += this.player.speed;
-                this.player.sprite.startAnimation(0);
+                if (!this.player.sprite.currentAnimation?.isRunning){
+                    this.player.sprite.startAnimation(0);
+                }
             }else{
                 this.player.sprite.stopAnimation();
             }
