@@ -1,10 +1,11 @@
 export class Frame{
-    constructor(path, x, y, width, height){
+    constructor(path, x, y, width, height, flip){
         this.path = path;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.flip = false || flip;
     }
 }
 

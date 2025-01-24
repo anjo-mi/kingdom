@@ -21,6 +21,9 @@ class Game{
         };
 
         this.player.sprite.addAnimation(walkRightAnimation);
+        this.player.sprite.addAnimation(walkLeftAnimation);
+        this.player.sprite.addAnimation(walkUpAnimation);
+        this.player.sprite.addAnimation(walkDownAnimation);
 
         this.gameLoop();
     }
@@ -64,9 +67,6 @@ class Game{
                 this.player.y += diagonalDistance.y;
             }
         }else{
-            if (this.input.keys.left) newX -= this.player.speed;
-            if (this.input.keys.up) newY -= this.player.speed;
-            if (this.input.keys.down) newY += this.player.speed;
             if (this.input.keys.right) {
                 newX += this.player.speed;
                 if (!this.player.sprite.currentAnimation?.isRunning){
@@ -75,6 +75,31 @@ class Game{
             }else{
                 this.player.sprite.stopAnimation();
             }
+            if (this.input.keys.left){
+                newX -= this.player.speed;
+                if (!this.player.sprite.currentAnimation?.isRunning){
+                    this.player.sprite.startAnimation(1);
+                }
+            }else{
+                this.player.sprite.stopAnimation();
+            }
+            if (this.input.keys.up){
+                newY -= this.player.speed;
+                if (!this.player.sprite.currentAnimation?.isRunning){
+                    this.player.sprite.startAnimation(2);
+                }
+            }else{
+                this.player.sprite.stopAnimation();
+            }
+            if (this.input.keys.down){
+                newY += this.player.speed;
+                if (!this.player.sprite.currentAnimation?.isRunning){
+                    this.player.sprite.startAnimation(3);
+                }
+            }else{
+                this.player.sprite.stopAnimation();
+            }
+
             const distance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
             this.player.x += distance.x;
             this.player.y += distance.y;
@@ -147,9 +172,148 @@ const walkRight6 = new Frame(
     40,
     46
 )
+const walkLeft1 = new Frame(
+    '/public/images/char.png',
+    19,
+    145,
+    24,
+    47,
+    true
+)
+
+const walkLeft2 = new Frame(
+    '/public/images/char.png',
+    53,
+    144,
+    27,
+    48,
+    true
+)
+const walkLeft3 = new Frame(
+    '/public/images/char.png',
+    90,
+    146,
+    39,
+    46,
+    true
+)
+const walkLeft4 = new Frame(
+    '/public/images/char.png',
+    137,
+    144,
+    26,
+    48,
+    true
+)
+const walkLeft5 = new Frame(
+    '/public/images/char.png',
+    171,
+    145,
+    32,
+    47,
+    true
+)
+const walkLeft6 = new Frame(
+    '/public/images/char.png',
+    210,
+    146,
+    40,
+    46,
+    true
+)
+const walkUp1 = new Frame(
+    '/public/images/char.png',
+    15,
+    517,
+    38,
+    49
+)
+const walkUp2 = new Frame(
+    '/public/images/char.png',
+    58,
+    520,
+    42,
+    46
+)
+const walkUp3 = new Frame(
+    '/public/images/char.png',
+    107,
+    520,
+    42,
+    46
+)
+const walkUp4 = new Frame(
+    '/public/images/char.png',
+    156,
+    521,
+    41,
+    45
+)
+const walkUp5 = new Frame(
+    '/public/images/char.png',
+    203,
+    516,
+    38,
+    50
+)
+const walkUp6 = new Frame(
+    '/public/images/char.png',
+    247,
+    513,
+    31,
+    53
+)
+const walkDown1 = new Frame(
+    '/public/images/char.png',
+    30,
+    857,
+    36,
+    43
+)
+const walkDown2 = new Frame(
+    '/public/images/char.png',
+    75,
+    852,
+    39,
+    48
+)
+const walkDown3 = new Frame(
+    '/public/images/char.png',
+    120,
+    854,
+    37,
+    46
+)
+const walkDown4 = new Frame(
+    '/public/images/char.png',
+    161,
+    857,
+    41,
+    43
+)
+const walkDown5 = new Frame(
+    '/public/images/char.png',
+    210,
+    852,
+    36,
+    48
+)
+const walkDown6 = new Frame(
+    '/public/images/char.png',
+    253,
+    854,
+    35,
+    46
+)
 const walkRight = [walkRight1, walkRight2, walkRight3, walkRight4, walkRight5, walkRight6];
+const walkLeft = [walkLeft1, walkLeft2, walkLeft3, walkLeft4, walkLeft5, walkLeft6];
+const walkUp = [walkUp1, walkUp2, walkUp3, walkUp4, walkUp5, walkUp6];
+const walkDown = [walkDown1, walkDown2, walkDown3, walkDown4, walkDown5, walkDown6];
 
 const walkRightAnimation = new Animation(walkRight)
+const walkLeftAnimation = new Animation(walkLeft)
+const walkUpAnimation = new Animation(walkUp)
+const walkDownAnimation = new Animation(walkDown)
 
 window.onload = () => {
     const game = new Game();
