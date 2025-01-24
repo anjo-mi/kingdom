@@ -72,31 +72,35 @@ class Game{
                 if (!this.player.sprite.currentAnimation?.isRunning){
                     this.player.sprite.startAnimation(0);
                 }
-            }else{
-                this.player.sprite.stopAnimation();
             }
             if (this.input.keys.left){
                 newX -= this.player.speed;
                 if (!this.player.sprite.currentAnimation?.isRunning){
                     this.player.sprite.startAnimation(1);
                 }
-            }else{
-                this.player.sprite.stopAnimation();
             }
             if (this.input.keys.up){
                 newY -= this.player.speed;
                 if (!this.player.sprite.currentAnimation?.isRunning){
                     this.player.sprite.startAnimation(2);
                 }
-            }else{
-                this.player.sprite.stopAnimation();
             }
             if (this.input.keys.down){
                 newY += this.player.speed;
                 if (!this.player.sprite.currentAnimation?.isRunning){
                     this.player.sprite.startAnimation(3);
                 }
-            }else{
+            }
+
+            let currentInput = false;
+
+            for (let key in this.input.keys){
+                if (this.input.keys[key] === true){
+                    currentInput = true
+                }
+            }
+
+            if (!currentInput){
                 this.player.sprite.stopAnimation();
             }
 
