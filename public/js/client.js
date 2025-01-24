@@ -69,26 +69,34 @@ class Game{
         }else{
             if (this.input.keys.right) {
                 newX += this.player.speed;
-                if (!this.player.sprite.currentAnimation?.isRunning){
+                const dir = 0;
+                if (!this.player.sprite.currentAnimation?.isRunning || dir !== this.player.sprite.currentDirection){
                     this.player.sprite.startAnimation(0);
+                    this.player.sprite.currentDirection = 0;
                 }
             }
             if (this.input.keys.left){
                 newX -= this.player.speed;
-                if (!this.player.sprite.currentAnimation?.isRunning){
+                const dir = 1;
+                if (!this.player.sprite.currentAnimation?.isRunning || dir !== this.player.sprite.currentDirection){
                     this.player.sprite.startAnimation(1);
+                    this.player.sprite.currentDirection = 1;
                 }
             }
             if (this.input.keys.up){
                 newY -= this.player.speed;
-                if (!this.player.sprite.currentAnimation?.isRunning){
+                const dir = 2;
+                if (!this.player.sprite.currentAnimation?.isRunning || dir !== this.player.sprite.currentDirection){
                     this.player.sprite.startAnimation(2);
+                    this.player.sprite.currentDirection = 2;
                 }
             }
             if (this.input.keys.down){
                 newY += this.player.speed;
-                if (!this.player.sprite.currentAnimation?.isRunning){
+                const dir = 3;
+                if (!this.player.sprite.currentAnimation?.isRunning || dir !== this.player.sprite.currentDirection){
                     this.player.sprite.startAnimation(3);
+                    this.player.sprite.currentDirection = 3;
                 }
             }
 

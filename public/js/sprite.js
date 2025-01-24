@@ -28,6 +28,7 @@ export class Sprite{
     constructor(imagePath){
         this.animations = [];
         this.currentAnimation = null;
+        this.currentDirection = null;
         this.image = new Image();
         this.image.src = imagePath;
     }
