@@ -56,16 +56,35 @@ export class Renderer{
         const currentFrame = player.sprite.getCurrentFrame();
         if (!currentFrame) return;
 
-        this.ctx.drawImage(
-            player.sprite.image,
-            currentFrame.x,
-            currentFrame.y,
-            currentFrame.width,
-            currentFrame.height,
-            player.x - this.camera.x,
-            player.y - this.camera.y,
-            currentFrame.width,
-            currentFrame.height
-        );
+        const flip = currentFrame.flip;
+
+        if (flip){
+            this.ctx.save();
+            this.ctx.scale(-1,1);
+            this.ctx.drawImage(
+                player.sprite.image,
+                currentFrame.x,
+                currentFrame.y,
+                currentFrame.width,
+                currentFrame.height,
+                -(player.x - this.camera.x + currentFrame.width),
+                player.y - this.camera.y,
+                currentFrame.width,
+                currentFrame.height
+            );
+        }else{
+
+            this.ctx.drawImage(
+                player.sprite.image,
+                currentFrame.x,
+                currentFrame.y,
+                currentFrame.width,
+                currentFrame.height,
+                player.x - this.camera.x,
+                player.y - this.camera.y,
+                currentFrame.width,
+                currentFrame.height
+            );
+        }
     }
 }
