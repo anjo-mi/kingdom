@@ -24,6 +24,7 @@ class Game{
         this.player.sprite.addAnimation(walkLeftAnimation);
         this.player.sprite.addAnimation(walkUpAnimation);
         this.player.sprite.addAnimation(walkDownAnimation);
+        this.player.sprite.addAnimation(slashRightAnimation);
 
         this.gameLoop();
     }
@@ -100,6 +101,14 @@ class Game{
                     this.player.sprite.currentDirection = 3;
                 }
             }
+            if (this.input.keys.s){
+                // newY += this.player.speed;
+                // const dir = 3;
+                // if (!this.player.sprite.currentAnimation?.isRunning || dir !== this.player.sprite.currentDirection){
+                    this.player.sprite.startAnimation(4);
+                    // this.player.sprite.currentDirection = 3;
+                }
+            // }
 
 
             for (let key in this.input.keys){
@@ -317,15 +326,80 @@ const walkDown6 = new Frame(
     35,
     46
 )
+const slashRight1 = new Frame(
+    '/public/images/char.png',
+    19,
+    80,
+    33,
+    47
+)
+const slashRight2 = new Frame(
+    '/public/images/char.png',
+    58,
+    80,
+    32,
+    47
+)
+const slashRight3 = new Frame(
+    '/public/images/char.png',
+    96,
+    81,
+    48,
+    46
+)
+const slashRight4 = new Frame(
+    '/public/images/char.png',
+    150,
+    82,
+    32,
+    45
+)
+const slashRight5 = new Frame(
+    '/public/images/char.png',
+    194,
+    82,
+    35,
+    45
+)
+const slashRight6 = new Frame(
+    '/public/images/char.png',
+    236,
+    75,
+    38,
+    52
+)
+const slashRight7 = new Frame(
+    '/public/images/char.png',
+    283,
+    75,
+    34,
+    52
+)
+const slashRight8 = new Frame(
+    '/public/images/char.png',
+    326,
+    87,
+    60,
+    40
+)
+const slashRight9 = new Frame(
+    '/public/images/char.png',
+    394,
+    80,
+    39,
+    47
+)
 const walkRight = [walkRight1, walkRight2, walkRight3, walkRight4, walkRight5, walkRight6];
 const walkLeft = [walkLeft1, walkLeft2, walkLeft3, walkLeft4, walkLeft5, walkLeft6];
 const walkUp = [walkUp1, walkUp2, walkUp3, walkUp4, walkUp5, walkUp6];
 const walkDown = [walkDown1, walkDown2, walkDown3, walkDown4, walkDown5, walkDown6];
+const slashRight = [slashRight1, slashRight2, slashRight3, slashRight4, slashRight5, slashRight6, slashRight7, slashRight8, slashRight9];
 
 const walkRightAnimation = new Animation(walkRight)
 const walkLeftAnimation = new Animation(walkLeft)
 const walkUpAnimation = new Animation(walkUp)
 const walkDownAnimation = new Animation(walkDown)
+const slashRightAnimation = new Animation(slashRight)
 
 window.onload = () => {
     const game = new Game();
