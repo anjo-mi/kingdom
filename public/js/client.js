@@ -31,6 +31,7 @@ class Game{
     // checks for input, calls Map.getAvailableDistance() which will check for collisions between start and target, moves player to position { x , y } returned from getAvailableDistance()
     // sets player.x and player.y to new postiion, while maintaining position inside the canvas
     update(){
+        let currentInput = false;
         let newX = this.player.x;
         let newY = this.player.y;
         const isDiagonal = (this.input.keys.up || this.input.keys.down) && (this.input.keys.left || this.input.keys.right);
@@ -100,7 +101,6 @@ class Game{
                 }
             }
 
-            let currentInput = false;
 
             for (let key in this.input.keys){
                 if (this.input.keys[key] === true){

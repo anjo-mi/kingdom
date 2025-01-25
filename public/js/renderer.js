@@ -72,6 +72,7 @@ export class Renderer{
                 currentFrame.width,
                 currentFrame.height
             );
+            this.ctx.restore();
         }else{
 
             this.ctx.drawImage(
