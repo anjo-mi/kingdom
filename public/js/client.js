@@ -102,14 +102,13 @@ class Game{
                 }
             }
             if (this.input.keys.s){
-                // newY += this.player.speed;
-                // const dir = 3;
-                // if (!this.player.sprite.currentAnimation?.isRunning || dir !== this.player.sprite.currentDirection){
+                if (this.player.sprite.currentAnimation?.isRunning){
+                    this.player.sprite.stopAnimation();
                     this.player.sprite.startAnimation(4);
-                    // this.player.sprite.currentDirection = 3;
                 }
-            // }
+            }
 
+            if (!this.player.sprite.currentAnimation?.loop) currentInput = true
 
             for (let key in this.input.keys){
                 if (this.input.keys[key] === true){
@@ -395,11 +394,12 @@ const walkUp = [walkUp1, walkUp2, walkUp3, walkUp4, walkUp5, walkUp6];
 const walkDown = [walkDown1, walkDown2, walkDown3, walkDown4, walkDown5, walkDown6];
 const slashRight = [slashRight1, slashRight2, slashRight3, slashRight4, slashRight5, slashRight6, slashRight7, slashRight8, slashRight9];
 
-const walkRightAnimation = new Animation(walkRight)
-const walkLeftAnimation = new Animation(walkLeft)
-const walkUpAnimation = new Animation(walkUp)
-const walkDownAnimation = new Animation(walkDown)
-const slashRightAnimation = new Animation(slashRight)
+const walkRightAnimation = new Animation(walkRight);
+const walkLeftAnimation = new Animation(walkLeft);
+const walkUpAnimation = new Animation(walkUp);
+const walkDownAnimation = new Animation(walkDown);
+const slashRightAnimation = new Animation(slashRight);
+    slashRightAnimation.loop = false;
 
 window.onload = () => {
     const game = new Game();

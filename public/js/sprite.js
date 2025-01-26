@@ -28,7 +28,9 @@ export class Sprite{
     constructor(imagePath){
         this.animations = [];
         this.currentAnimation = null;
+        this.previousAnimation = null;
         this.currentDirection = null;
+        this.previousDirection = null;
         this.image = new Image();
         this.image.src = imagePath;
     }
@@ -39,6 +41,9 @@ export class Sprite{
 
     startAnimation(index){
         if (index >= 0 && index < this.animations.length){
+            if (this.currentAnimation && this.currentAnimation !== this.previousAnimation){
+                this.previousAnimation = this.currentAnimation;
+            }
             this.currentAnimation = this.animations[index];
             this.currentAnimation.isRunning = true;
             this.currentAnimation.currentFrame = 0;
@@ -50,6 +55,9 @@ export class Sprite{
         if (this.currentAnimation){
             this.currentAnimation.isRunning = false;
             // ?????????? will this leave it frozen on last walking animation???????
+            if (this.previousAnimation){
+                this.currentAnimation = this.previousAnimation;
+            }
             this.currentAnimation.currentFrame = 0;
         }
     }
@@ -67,10 +75,18 @@ export class Sprite{
             this.currentAnimation.frameCount = 0;
             this.currentAnimation.currentFrame++;
 
-            if(this.currentAnimation.currentFrame >= this.currentAnimation.frames.length){
+            if(!this.currentAnimation.loop && 
+                this.currentAnimation.currentFrame >= this.currentAnimation.frames.length){
                 this.currentAnimation.currentFrame = 0;
                 if (!this.currentAnimation.loop){
-                    this.stopAnimation()
+                    this.stopAnimation();
+                    return;
+                }
+            }else if(this.currentAnimation.currentFrame >= this.currentAnimation.frames.length){
+                this.currentAnimation.currentFrame = 0;
+                if (!this.currentAnimation.loop){
+                    this.stopAnimation();
+                    return;
                 }
             }
         }
