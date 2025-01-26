@@ -37,8 +37,15 @@ class Game{
         let newY = this.player.y;
         const isDiagonal = (this.input.keys.up || this.input.keys.down) && (this.input.keys.left || this.input.keys.right);
         const speed = isDiagonal ? this.player.speed / Math.sqrt(2) : this.player.speed;
-
-        if (isDiagonal) {
+        
+        if (this.input.keys.s){
+            if (!this.player.sprite.currentAnimation || 
+                this.player.sprite.currentAnimation.loop){
+                this.player.sprite.stopAnimation();
+                this.player.sprite.startAnimation(4);
+                this.player.sprite.currentDirection = -1;
+            }
+        }else if (isDiagonal) {
             if (this.input.keys.up) newY -= speed;
             if (this.input.keys.down) newY += speed;
             if (this.input.keys.right) newX += speed;
@@ -99,12 +106,6 @@ class Game{
                 if (!this.player.sprite.currentAnimation?.isRunning || dir !== this.player.sprite.currentDirection){
                     this.player.sprite.startAnimation(3);
                     this.player.sprite.currentDirection = 3;
-                }
-            }
-            if (this.input.keys.s){
-                if (this.player.sprite.currentAnimation?.isRunning){
-                    this.player.sprite.stopAnimation();
-                    this.player.sprite.startAnimation(4);
                 }
             }
             console.log('current: ', this.player.sprite.currentAnimation)
