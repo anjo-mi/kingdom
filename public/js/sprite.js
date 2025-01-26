@@ -54,6 +54,11 @@ export class Sprite{
         }
     }
 
+    onComplete(){
+        this.currentAnimation.isRunning = false;
+        this.currentDirection = null;
+    }
+
     update(){
         if (!this.currentAnimation || !this.currentAnimation.isRunning || this.currentAnimation.isPaused){
 
@@ -63,7 +68,11 @@ export class Sprite{
         this.currentAnimation.frameCount = (this.currentAnimation.frameCount || 0) + 1
         console.log(this.currentAnimation.frameCount)
 
-        // this needs to update for just lateral movement
+        if (this.currentAnimation.currentFrame >= this.currentAnimation.frames.length - 1){
+            if (!this.currentAnimation.loop){
+                this.currentAnimation.onComplete();
+            }
+        }
 
         if (this.currentAnimation.frameCount >= this.currentAnimation.frameRate){
             this.currentAnimation.frameCount = 0;
