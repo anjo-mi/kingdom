@@ -109,9 +109,6 @@ class Game{
                 }
             }
             
-            const distance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
-            this.player.x += distance.x;
-            this.player.y += distance.y;
         }
         console.log('current: ', this.player.sprite.currentAnimation)
         if (!this.player.sprite.currentAnimation?.loop) currentInput = true
@@ -125,6 +122,9 @@ class Game{
         if (!currentInput){
             this.player.sprite.stopAnimation();
         }
+        const distance = this.map.getAvailableDistance(this.player.x, this.player.y, newX, newY, this.player.width, this.player.height);
+        this.player.x += distance.x;
+        this.player.y += distance.y;
         
         this.player.x = Math.max(0, Math.min(this.player.x, this.map.width - this.player.width));
         this.player.y = Math.max(0, Math.min(this.player.y, this.map.height - this.player.height));
