@@ -27,7 +27,7 @@ export class Animation{
 export class Sprite{
     constructor(imagePath){
         this.animations = [];
-        this.currentAnimation = null;
+        this.currentAnimation = new Animation([]);
         this.currentDirection = null;
         this.image = new Image();
         this.image.src = imagePath;
