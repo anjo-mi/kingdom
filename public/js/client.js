@@ -25,6 +25,7 @@ class Game{
         this.player.sprite.addAnimation(walkUpAnimation);
         this.player.sprite.addAnimation(walkDownAnimation);
         this.player.sprite.addAnimation(slashRightAnimation);
+        this.player.sprite.addAnimation(slashLeftAnimation);
 
         this.gameLoop();
     }
@@ -41,9 +42,14 @@ class Game{
         if (this.input.keys.s){
             if (!this.player.sprite.currentAnimation || 
                 this.player.sprite.currentAnimation.loop){
-                this.player.sprite.stopAnimation();
-                this.player.sprite.startAnimation(4);
-                this.player.sprite.currentDirection = -1;
+                    this.player.sprite.stopAnimation();
+                    const dir = this.player.sprite.currentDirection;
+                    if (dir){
+                        this.player.sprite.startAnimation(dir + 4);
+                    }else{
+                        this.player.sprite.startAnimation(4)
+                    }
+                    
             }
         }else if (isDiagonal) {
             if (this.input.keys.up) newY -= speed;
@@ -80,32 +86,32 @@ class Game{
                 newX += this.player.speed;
                 const dir = 0;
                 if (!this.player.sprite.currentAnimation?.isRunning || dir !== this.player.sprite.currentDirection){
-                    this.player.sprite.startAnimation(0);
-                    this.player.sprite.currentDirection = 0;
+                    this.player.sprite.startAnimation(dir);
+                    this.player.sprite.currentDirection = dir;
                 }
             }
             if (this.input.keys.left){
                 newX -= this.player.speed;
                 const dir = 1;
                 if (!this.player.sprite.currentAnimation?.isRunning || dir !== this.player.sprite.currentDirection){
-                    this.player.sprite.startAnimation(1);
-                    this.player.sprite.currentDirection = 1;
+                    this.player.sprite.startAnimation(dir);
+                    this.player.sprite.currentDirection = dir;
                 }
             }
             if (this.input.keys.up){
                 newY -= this.player.speed;
                 const dir = 2;
                 if (!this.player.sprite.currentAnimation?.isRunning || dir !== this.player.sprite.currentDirection){
-                    this.player.sprite.startAnimation(2);
-                    this.player.sprite.currentDirection = 2;
+                    this.player.sprite.startAnimation(dir);
+                    this.player.sprite.currentDirection = dir;
                 }
             }
             if (this.input.keys.down){
                 newY += this.player.speed;
                 const dir = 3;
                 if (!this.player.sprite.currentAnimation?.isRunning || dir !== this.player.sprite.currentDirection){
-                    this.player.sprite.startAnimation(3);
-                    this.player.sprite.currentDirection = 3;
+                    this.player.sprite.startAnimation(dir);
+                    this.player.sprite.currentDirection = dir;
                 }
             }
             
@@ -118,7 +124,6 @@ class Game{
                 currentInput = true
             }
         }
-        console.log(currentInput)
         if (!currentInput){
             this.player.sprite.stopAnimation();
         }
@@ -389,11 +394,84 @@ const slashRight9 = new Frame(
     39,
     47
 )
+const slashLeft1 = new Frame(
+    '/public/images/char.png',
+    19,
+    80,
+    33,
+    47,
+    true
+)
+const slashLeft2 = new Frame(
+    '/public/images/char.png',
+    58,
+    80,
+    32,
+    47,
+    true
+)
+const slashLeft3 = new Frame(
+    '/public/images/char.png',
+    96,
+    81,
+    48,
+    46,
+    true
+)
+const slashLeft4 = new Frame(
+    '/public/images/char.png',
+    150,
+    82,
+    32,
+    45,
+    true
+)
+const slashLeft5 = new Frame(
+    '/public/images/char.png',
+    194,
+    82,
+    35,
+    45,
+    true
+)
+const slashLeft6 = new Frame(
+    '/public/images/char.png',
+    236,
+    75,
+    38,
+    52,
+    true
+)
+const slashLeft7 = new Frame(
+    '/public/images/char.png',
+    283,
+    75,
+    34,
+    52,
+    true
+)
+const slashLeft8 = new Frame(
+    '/public/images/char.png',
+    326,
+    87,
+    60,
+    40,
+    true
+)
+const slashLeft9 = new Frame(
+    '/public/images/char.png',
+    394,
+    80,
+    39,
+    47,
+    true
+)
 const walkRight = [walkRight1, walkRight2, walkRight3, walkRight4, walkRight5, walkRight6];
 const walkLeft = [walkLeft1, walkLeft2, walkLeft3, walkLeft4, walkLeft5, walkLeft6];
 const walkUp = [walkUp1, walkUp2, walkUp3, walkUp4, walkUp5, walkUp6];
 const walkDown = [walkDown1, walkDown2, walkDown3, walkDown4, walkDown5, walkDown6];
 const slashRight = [slashRight1, slashRight2, slashRight3, slashRight4, slashRight5, slashRight6, slashRight7, slashRight8, slashRight9];
+const slashLeft = [slashLeft1, slashLeft2, slashLeft3, slashLeft4, slashLeft5, slashLeft6, slashLeft7, slashLeft8, slashLeft9];
 
 const walkRightAnimation = new Animation(walkRight);
 const walkLeftAnimation = new Animation(walkLeft);
@@ -401,6 +479,8 @@ const walkUpAnimation = new Animation(walkUp);
 const walkDownAnimation = new Animation(walkDown);
 const slashRightAnimation = new Animation(slashRight);
     slashRightAnimation.loop = false;
+const slashLeftAnimation = new Animation(slashRight);
+    slashLeftAnimation.loop = false;
 
 window.onload = () => {
     const game = new Game();
