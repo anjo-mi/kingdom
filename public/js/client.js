@@ -119,7 +119,7 @@ class Game{
             
         }
         console.log('current: ', this.player.sprite.currentAnimation)
-        // if (!this.player.sprite.currentAnimation?.loop) currentInput = true
+        if (!this.player.sprite.currentAnimation?.loop) currentInput = true
     
         for (let key in this.input.keys){
             if (this.input.keys[key] === true || this.player.sprite.currentAnimation.frameCount > this.player.sprite.currentAnimation.frames.length - 1){
