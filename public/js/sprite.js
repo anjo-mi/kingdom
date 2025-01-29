@@ -78,17 +78,25 @@ export class Sprite{
             this.currentAnimation.frameCount = 0;
             this.currentAnimation.currentFrame++;
 
-            if(!this.currentAnimation.loop){
-                this.currentAnimation.currentFrame = 0;
-                this.stopAnimation();
-                return;
-            }else if(this.currentAnimation.currentFrame >= this.currentAnimation.frames.length){
-                this.currentAnimation.currentFrame = 0;
+            if(this.currentAnimation.currentFrame >= this.currentAnimation.frames.length){
                 if (!this.currentAnimation.loop){
                     this.stopAnimation();
                     return;
                 }
+                this.currentAnimation.currentFrame = 0;
             }
+
+            // if(!this.currentAnimation.loop){
+            //     this.currentAnimation.currentFrame = 0;
+            //     this.stopAnimation();
+            //     return;
+            // }else if(this.currentAnimation.currentFrame >= this.currentAnimation.frames.length){
+            //     this.currentAnimation.currentFrame = 0;
+            //     if (!this.currentAnimation.loop){
+            //         this.stopAnimation();
+            //         return;
+            //     }
+            // }
         }
     }
 
