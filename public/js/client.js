@@ -26,6 +26,8 @@ class Game{
         this.player.sprite.addAnimation(walkDownAnimation);
         this.player.sprite.addAnimation(slashRightAnimation);
         this.player.sprite.addAnimation(slashLeftAnimation);
+        this.player.sprite.addAnimation(slashUpAnimation);
+        this.player.sprite.addAnimation(slashDownAnimation);
 
         this.gameLoop();
     }
@@ -466,12 +468,147 @@ const slashLeft9 = new Frame(
     47,
     true
 )
+const slashUp1 = new Frame(
+    '/public/images/char.png',
+    16,
+    588,
+    37,
+    56
+)
+const slashUp2 = new Frame(
+    '/public/images/char.png',
+    61,
+    592,
+    36,
+    52
+)
+const slashUp3 = new Frame(
+    '/public/images/char.png',
+    104,
+    597,
+    41,
+    47
+)
+const slashUp4 = new Frame(
+    '/public/images/char.png',
+    172,
+    588,
+    40,
+    56
+)
+const slashUp5 = new Frame(
+    '/public/images/char.png',
+    218,
+    592,
+    28,
+    52
+)
+const slashUp6 = new Frame(
+    '/public/images/char.png',
+    254,
+    598,
+    48,
+    46
+)
+const slashUp7 = new Frame(
+    '/public/images/char.png',
+    312,
+    583,
+    44,
+    65
+)
+const slashUp8 = new Frame(
+    '/public/images/char.png',
+    363,
+    604,
+    38,
+    43
+)
+const slashUp9 = new Frame(
+    '/public/images/char.png',
+    407,
+    601,
+    31,
+    46
+)
+const slashUp10 = new Frame(
+    '/public/images/char.png',
+    450,
+    599,
+    37,
+    48
+)
+const slashDown1 = new Frame(
+    '/public/images/char.png',
+    37,
+    916,
+    26,
+    57
+)
+const slashDown2 = new Frame(
+    '/public/images/char.png',
+    71,
+    918,
+    26,
+    55
+)
+const slashDown3 = new Frame(
+    '/public/images/char.png',
+    108,
+    917,
+    29,
+    56
+)
+const slashDown4 = new Frame(
+    '/public/images/char.png',
+    173,
+    912,
+    28,
+    62
+)
+const slashDown5 = new Frame(
+    '/public/images/char.png',
+    216,
+    916,
+    26,
+    56
+)
+const slashDown6 = new Frame(
+    '/public/images/char.png',
+    254,
+    926,
+    44,
+    43
+)
+const slashDown7 = new Frame(
+    '/public/images/char.png',
+    307,
+    931,
+    47,
+    54
+)
+const slashDown8 = new Frame(
+    '/public/images/char.png',
+    363,
+    925,
+    43,
+    46
+)
+const slashDown9 = new Frame(
+    '/public/images/char.png',
+    412,
+    924,
+    46,
+    47
+)
 const walkRight = [walkRight1, walkRight2, walkRight3, walkRight4, walkRight5, walkRight6];
 const walkLeft = [walkLeft1, walkLeft2, walkLeft3, walkLeft4, walkLeft5, walkLeft6];
 const walkUp = [walkUp1, walkUp2, walkUp3, walkUp4, walkUp5, walkUp6];
 const walkDown = [walkDown1, walkDown2, walkDown3, walkDown4, walkDown5, walkDown6];
 const slashRight = [slashRight1, slashRight2, slashRight3, slashRight4, slashRight5, slashRight6, slashRight7, slashRight8, slashRight9];
 const slashLeft = [slashLeft1, slashLeft2, slashLeft3, slashLeft4, slashLeft5, slashLeft6, slashLeft7, slashLeft8, slashLeft9];
+const slashUp = [slashUp1, slashUp2, slashUp3, slashUp4, slashUp5, slashUp6, slashUp7, slashUp8, slashUp9, slashUp10];
+const slashDown = [slashDown1, slashDown2, slashDown3, slashDown4, slashDown5, slashDown6, slashDown7, slashDown8, slashDown9];
 
 const walkRightAnimation = new Animation(walkRight);
 const walkLeftAnimation = new Animation(walkLeft);
@@ -479,8 +616,12 @@ const walkUpAnimation = new Animation(walkUp);
 const walkDownAnimation = new Animation(walkDown);
 const slashRightAnimation = new Animation(slashRight);
     slashRightAnimation.loop = false;
-const slashLeftAnimation = new Animation(slashRight);
+const slashLeftAnimation = new Animation(slashLeft);
     slashLeftAnimation.loop = false;
+const slashUpAnimation = new Animation(slashUp);
+    slashUpAnimation.loop = false;
+const slashDownAnimation = new Animation(slashDown);
+    slashDownAnimation.loop = false;
 
 window.onload = () => {
     const game = new Game();
