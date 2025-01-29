@@ -80,7 +80,9 @@ export class Sprite{
 
             if(this.currentAnimation.currentFrame >= this.currentAnimation.frames.length){
                 if (!this.currentAnimation.loop){
+                    this.currentAnimation.currentFrame = 0;
                     this.stopAnimation();
+                    this.currentDirection = null;
                     return;
                 }
                 this.currentAnimation.currentFrame = 0;
