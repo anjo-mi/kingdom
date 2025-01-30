@@ -55,7 +55,7 @@ export class Sprite{
 
     onComplete(){
         this.currentAnimation.isRunning = false;
-        this.currentDirection = null;
+        // this.currentDirection = null;
     }
 
     update(){
@@ -81,7 +81,7 @@ export class Sprite{
                 if (!this.currentAnimation.loop){
                     this.currentAnimation.currentFrame = 0;
                     this.stopAnimation();
-                    this.currentDirection = null;
+                    // this.currentDirection = null;
                     return;
                 }
                 this.currentAnimation.currentFrame = 0;

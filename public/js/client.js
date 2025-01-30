@@ -615,12 +615,16 @@ const walkUpAnimation = new Animation(walkUp);
 const walkDownAnimation = new Animation(walkDown);
 const slashRightAnimation = new Animation(slashRight);
     slashRightAnimation.loop = false;
-const slashLeftAnimation = new Animation(slashLeft);
+    slashRightAnimation.frameRate = 5;
+    const slashLeftAnimation = new Animation(slashLeft);
     slashLeftAnimation.loop = false;
-const slashUpAnimation = new Animation(slashUp);
+    slashLeftAnimation.frameRate = 5;
+    const slashUpAnimation = new Animation(slashUp);
     slashUpAnimation.loop = false;
-const slashDownAnimation = new Animation(slashDown);
+    slashUpAnimation.frameRate = 5;
+    const slashDownAnimation = new Animation(slashDown);
     slashDownAnimation.loop = false;
+    slashDownAnimation.frameRate = 5;
 
 window.onload = () => {
     const game = new Game();
