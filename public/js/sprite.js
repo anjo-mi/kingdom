@@ -48,17 +48,8 @@ export class Sprite{
     
     stopAnimation(){
         if (this.currentAnimation){
-            console.log('stop animation:', {
-                wasRunning: this.currentAnimation.isRunning,
-                direction: this.CurrentDirection
-            });
             this.currentAnimation.isRunning = false;
             this.currentAnimation.currentFrame = 0;
-            console.log('after stop', {
-                isRunning: this.currentAnimation.isRunning,
-                direction: this.currentDirection,
-                animation: this.currentAnimation
-            })
         }
     }
 

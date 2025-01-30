@@ -118,7 +118,6 @@ class Game{
             }
             
         }
-        console.log('current: ', this.player.sprite.currentAnimation)
         if (!this.player.sprite.currentAnimation?.loop) currentInput = true
     
         for (let key in this.input.keys){
