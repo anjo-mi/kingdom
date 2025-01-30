@@ -50,7 +50,8 @@ export class Sprite{
         if (this.currentAnimation){
             this.currentAnimation.isRunning = false;
             if (!this.currentAnimation.loop){
-                this.startAnimation(dir)
+                this.startAnimation(dir);
+                this.currentAnimation.isRunning = true;
             }
             this.currentAnimation.currentFrame = 0;
         }
