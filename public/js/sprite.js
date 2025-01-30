@@ -46,9 +46,12 @@ export class Sprite{
         }
     }
     
-    stopAnimation(){
+    stopAnimation(dir){
         if (this.currentAnimation){
             this.currentAnimation.isRunning = false;
+            if (!this.currentAnimation.loop){
+                this.startAnimation(dir)
+            }
             this.currentAnimation.currentFrame = 0;
         }
     }
@@ -63,9 +66,7 @@ export class Sprite{
 
             return;
         }
-        console.log(this.currentAnimation.frameCount)
         this.currentAnimation.frameCount = (this.currentAnimation.frameCount || 0) + 1
-        console.log(this.currentAnimation.frameCount)
 
         if (this.currentAnimation.currentFrame >= this.currentAnimation.frames.length - 1){
             if (!this.currentAnimation.loop){

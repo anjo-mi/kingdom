@@ -44,8 +44,8 @@ class Game{
         if (this.input.keys.s){
             if (!this.player.sprite.currentAnimation || 
                 this.player.sprite.currentAnimation.loop){
-                    this.player.sprite.stopAnimation();
                     const dir = this.player.sprite.currentDirection;
+                    this.player.sprite.stopAnimation(dir);
                     if (dir){
                         this.player.sprite.startAnimation(dir + 4);
                     }else{
